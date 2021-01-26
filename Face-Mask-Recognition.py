@@ -3,6 +3,7 @@ import os
 from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.models import load_model
 from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
+from Email import sendMail
 import numpy as np
 
 cascPath = os.path.dirname(
@@ -11,6 +12,7 @@ faceCascade = cv2.CascadeClassifier(cascPath)
 model = load_model("mask_recog1.h5")
 
 video_capture = cv2.VideoCapture(0)
+i=0
 while True:
     # Capture frame-by-frame
     ret, frame = video_capture.read()
@@ -39,6 +41,20 @@ while True:
         label = "{}: {:.2f}%".format(label, max(mask, withoutMask) * 100)
         cv2.putText(frame, label, (x, y - 10),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.45, color, 2)
+
+        if cv2.waitKey(1) &  0xFF == ord('s'):
+            return_value, image = video_capture.read()
+            path_metMasker = "D:\School\Jaar 2\IKPHBV\IKPHBV-Facial-Recognision\MetMasker"
+            path_zonderMasker = "D:\School\Jaar 2\IKPHBV\IKPHBV-Facial-Recognision\ZonderMasker"
+            i += 1
+            if mask > withoutMask:
+                file = cv2.imwrite(os.path.join(path_metMasker, f"mask_{i}.jpg"), image)
+                cv2.imshow("foto met", image)
+            elif withoutMask > mask:
+                file = cv2.imwrite(os.path.join(path_zonderMasker, f"no_mask_{i}.jpg"), image)
+                cv2.imshow("foto zonder", image)
+            else:
+                cv2.imshow("nothing", image)
 
         cv2.rectangle(frame, (x, y), (x + w, y + h), color, 2)
         # Display the resulting frame
