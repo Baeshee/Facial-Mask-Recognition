@@ -8,9 +8,9 @@ from email.mime.text import MIMEText
 def sendMail(foto):
     port = 587
     smtp_server = "smtp.gmail.com"
-    password = "GuitarGuy997"
+    password = ""
     sender_email = "testingpythonsendemail@gmail.com"
-    receiver_email = "bafloba1203@gmail.com"
+    receiver_email = ""
     # receiver_email = "s1118301@student.hsleiden.nl"
     subject = "Person without mouth mask"
     body = "The following person is walking around the complex without a mouth mask, I would kindly ask the floor patrol to approach this individual and ask them to wear one or leave the complex."
