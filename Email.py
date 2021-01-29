@@ -8,10 +8,9 @@ from email.mime.text import MIMEText
 def sendMail(foto):
     port = 587
     smtp_server = "smtp.gmail.com"
-    password = ""
-    sender_email = "testingpythonsendemail@gmail.com"
-    receiver_email = ""
-    # receiver_email = "s1118301@student.hsleiden.nl"
+    password = input("Enter your Sender (GMAIL) Password") #hier komt je wachtwoord
+    sender_email = input("Enter your Sender (GMAIL) Email: ") #hier komt je email adress
+    receiver_email = input("Enter the Receiver Email: ") #hier komt de receiver email adress
     subject = "Person without mouth mask"
     body = "The following person is walking around the complex without a mouth mask, I would kindly ask the floor patrol to approach this individual and ask them to wear one or leave the complex."
 
@@ -42,24 +41,3 @@ def sendMail(foto):
         server.ehlo()
         server.login(sender_email, password)
         server.sendmail(sender_email, receiver_email, text)
-
-
-# import smtplib, ssl
-#
-# port = 587  # For starttls
-# smtp_server = "smtp.gmail.com"
-#sender_email = "testingpythonsendemail@gmail.com"
-#receiver_email = ""
-# password = "GuitarGuy997"
-# message = """\
-# Subject: Hi there
-#
-# This message is sent from Python."""
-#
-# context = ssl.create_default_context()
-# with smtplib.SMTP(smtp_server, port) as server:
-#     server.ehlo()  # Can be omitted
-#     server.starttls(context=context)
-#     server.ehlo()  # Can be omitted
-#     server.login(sender_email, password)
-#     server.sendmail(sender_email, receiver_email, message)
