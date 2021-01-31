@@ -15,6 +15,11 @@ def startFaceRecognition():
 
     video_capture = cv2.VideoCapture(0)
     i = 0
+
+    path = "C:/Users/" + getpass.getuser() + "/Pictures/MaskMonitoring/"
+    ZonderMasker = "ZonderMasker"
+    folder = os.path.join(path, ZonderMasker)
+
     while True:
         # Capture frame-by-frame
         ret, frame = video_capture.read()
@@ -46,19 +51,12 @@ def startFaceRecognition():
 
             if cv2.waitKey(1) & 0xFF == ord('s'):
                 return_value, image = video_capture.read()
-                # path_metMasker = "D:/School/Jaar 2/IKPHBV/IKPHBV-Facial-Recognision/MetMasker"
-                # path_zonderMasker = "D:/School/Jaar 2/IKPHBV/IKPHBV-Facial-Recognision/ZonderMasker"
-                path_metMasker = "C:/Users/" + getpass.getuser() + "/Pictures/MaskMonitoring/MetMasker"
-                path_zonderMasker = "C:/Users/" + getpass.getuser() + "/Pictures/MaskMonitoring/ZonderMasker"
                 i += 1
-                if mask > withoutMask:
-                    file = cv2.imwrite(os.path.join(path_metMasker, f"mask_{i}.jpg"), image)
-                    cv2.imshow("foto met", image)
-                elif withoutMask > mask:
-                    file = cv2.imwrite(os.path.join(path_zonderMasker, f"no_mask_{i}.jpg"), image)
-                    cv2.imshow("foto zonder", image)
-                else:
-                    cv2.imshow("nothing", image)
+                base = os.path.join(folder, "no_mask_" + str(i));
+
+                if withoutMask > mask:
+                    cv2.imwrite(base + ".png", image)
+                    cv2.imshow("Last detection", image)
 
             cv2.rectangle(frame, (x, y), (x + w, y + h), color, 2)
             # Display the resulting frame
