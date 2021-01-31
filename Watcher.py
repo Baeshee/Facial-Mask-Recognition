@@ -10,6 +10,7 @@ def getSize(filename):
 
 
 def startWatchingNoMaskFolder():
+    # Change the path to the location you save your No_Mask files
     path_to_watch = "C:/Users/" + getpass.getuser() + "/Pictures/MaskMonitoring/ZonderMasker"
     before = dict([(f, None) for f in os.listdir(path_to_watch)])
     while 1:

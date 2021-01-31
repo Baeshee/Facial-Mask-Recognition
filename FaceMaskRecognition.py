@@ -46,16 +46,16 @@ def startFaceRecognition():
 
             if cv2.waitKey(1) & 0xFF == ord('s'):
                 return_value, image = video_capture.read()
-                # path_metMasker = "D:/School/Jaar 2/IKPHBV/IKPHBV-Facial-Recognision/MetMasker"
-                # path_zonderMasker = "D:/School/Jaar 2/IKPHBV/IKPHBV-Facial-Recognision/ZonderMasker"
+
+                # Change the path if you want to write to another chosen location
                 path_metMasker = "C:/Users/" + getpass.getuser() + "/Pictures/MaskMonitoring/MetMasker"
                 path_zonderMasker = "C:/Users/" + getpass.getuser() + "/Pictures/MaskMonitoring/ZonderMasker"
                 i += 1
                 if mask > withoutMask:
-                    file = cv2.imwrite(os.path.join(path_metMasker, f"mask_{i}.jpg"), image)
+                    cv2.imwrite(os.path.join(path_metMasker, f"mask_{i}.jpg"), image)
                     cv2.imshow("foto met", image)
                 elif withoutMask > mask:
-                    file = cv2.imwrite(os.path.join(path_zonderMasker, f"no_mask_{i}.jpg"), image)
+                    cv2.imwrite(os.path.join(path_zonderMasker, f"no_mask_{i}.jpg"), image)
                     cv2.imshow("foto zonder", image)
                 else:
                     cv2.imshow("nothing", image)
