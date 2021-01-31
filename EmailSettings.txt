@@ -1,0 +1,3 @@
+# Add your Gmail address on the next line & the email to send it to the line after that.
+gmail1
+email2
